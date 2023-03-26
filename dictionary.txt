@@ -4,4 +4,6 @@
 3. := -> used for initiate variable but not constant
 4. use pointer (&) and Scan to get inputted data from user
 5. calculation between 2 variable should be using the same data types
+6. strings.Fields() used for explode string with space as separator
+7. _ used to ignore a variable that we dont wanna use it (explicit condition)
 
