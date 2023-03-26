@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
@@ -10,7 +9,8 @@ func main() {
 	const conferenceTickets uint = 50
 	remainingTickets := conferenceTickets
 
-	var bookings []string
+	bookings := []string{}
+	firstNames := []string{}
 
 	fmt.Printf("conferenceTickets is %T, remainingTickets is %T, conferenceName is %T", conferenceTickets, remainingTickets, conferenceName)
 
@@ -18,7 +18,7 @@ func main() {
 	fmt.Printf("We have total of %v tickets and %v are still available \n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
 
-	for remainingTickets != 0 {
+	for remainingTickets > 0 {
 		var firstName string
 		var lastName string
 		var emailAddress string
@@ -45,12 +45,7 @@ func main() {
 			fmt.Printf("Thank you %v %v for booking %v tickets.\nYou will recieve confirmation email at %v\n", firstName, lastName, userTickets, emailAddress)
 			fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 
-			firstNames := []string{}
-			for _, booking := range bookings {
-				var names = strings.Fields(booking)
-				var firstName = names[0]
-				firstNames = append(firstNames, firstName)
-			}
+			firstNames = append(firstNames, firstName)
 			fmt.Printf("These first name of bookings for %v are %v\n", conferenceName, firstNames)
 		}
 	}
