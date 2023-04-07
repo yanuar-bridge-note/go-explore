@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 const conferenceTickets uint = 50
@@ -38,14 +37,6 @@ func greetUser() {
 	fmt.Printf("Welcome to %v booking application \n", conferenceName)
 	fmt.Printf("We have total of %v tickets and %v are still available \n", conferenceTickets, remainingTickets)
 	fmt.Println("Get your tickets here to attend")
-}
-
-func validateUserInput(firstName string, lastName string, emailAddress string, userTickets uint) (bool, bool, bool) {
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(emailAddress, "@")
-	isValidUserTickets := userTickets > 0 && userTickets <= remainingTickets
-
-	return isValidName, isValidEmail, isValidUserTickets
 }
 
 func setUserInput() (string, string, string, uint) {
