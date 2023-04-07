@@ -7,3 +7,6 @@
 6. strings.Fields() used for explode string with space as separator
 7. _ used to ignore a variable that we dont wanna use it (explicit condition)
 
+// -------------------4 April 2023 ----------------------- //
+1. how to write func at golang is like this 
+    func xx (var data type) (return data type){}
