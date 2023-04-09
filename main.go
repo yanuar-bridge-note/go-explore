@@ -88,7 +88,7 @@ func saveBooking(userTickets uint, firstName string, lastName string, emailAddre
 	// userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
 	bookings = append(bookings, userData)
-	sendTickets(userData)
+	go sendTickets(userData)
 	fmt.Printf("Thank you %v %v for booking %v tickets.\nYou will recieve confirmation email at %v\n", firstName, lastName, userTickets, emailAddress)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 	firstNames = append(firstNames, firstName)

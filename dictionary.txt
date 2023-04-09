@@ -20,3 +20,4 @@
     type {structName} struct {
         {keyName} dataType
     }
+5. use 'go' infornt of the function that you want to run, for make it separate gorouting so it won't be blocked other function
