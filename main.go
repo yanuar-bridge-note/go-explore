@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"sync"
 	"time"
 )
 
@@ -20,25 +21,27 @@ type UserData struct {
 	tickets      uint
 }
 
+var wg = sync.WaitGroup{}
+
 func main() {
 	greetUser()
-	for remainingTickets > 0 {
-		firstName, lastName, emailAddress, userTickets := setUserInput()
-		isValidName, isValidEmail, isValidUserTickets := helper.ValidateUserInput(firstName, lastName, emailAddress, userTickets, remainingTickets)
+	firstName, lastName, emailAddress, userTickets := setUserInput()
+	isValidName, isValidEmail, isValidUserTickets := helper.ValidateUserInput(firstName, lastName, emailAddress, userTickets, remainingTickets)
 
-		if isValidName && isValidEmail && isValidUserTickets {
-			saveBooking(userTickets, firstName, lastName, emailAddress)
-		} else if !isValidName {
-			fmt.Println("First name and Last name should be more than 2 characters, please try it again")
-			continue
-		} else if !isValidEmail {
-			fmt.Println("Your email format seems incorrect, please try it again")
-			continue
-		} else if !isValidUserTickets {
-			fmt.Printf("Sorry tickets that you bought is over capacity, please enter below or same as %v. Thank you\n", remainingTickets)
-			continue
-		}
+	if isValidName && isValidEmail && isValidUserTickets {
+		saveBooking(userTickets, firstName, lastName, emailAddress)
+	} else if !isValidName {
+		fmt.Println("First name and Last name should be more than 2 characters, please try it again")
+		// continue
+	} else if !isValidEmail {
+		fmt.Println("Your email format seems incorrect, please try it again")
+		// continue
+	} else if !isValidUserTickets {
+		fmt.Printf("Sorry tickets that you bought is over capacity, please enter below or same as %v. Thank you\n", remainingTickets)
+		// continue
 	}
+
+	wg.Wait()
 	closingMessage()
 }
 
@@ -88,6 +91,7 @@ func saveBooking(userTickets uint, firstName string, lastName string, emailAddre
 	// userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
 	bookings = append(bookings, userData)
+	wg.Add(1)
 	go sendTickets(userData)
 	fmt.Printf("Thank you %v %v for booking %v tickets.\nYou will recieve confirmation email at %v\n", firstName, lastName, userTickets, emailAddress)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
@@ -105,8 +109,9 @@ func closingMessage() {
 }
 
 func sendTickets(userData UserData) {
-	time.Sleep(10 * time.Second)
+	time.Sleep(60 * time.Second)
 	fmt.Println("Sending ticket to", userData.emailAddress)
 	fmt.Printf("Dear %v %v, \n", userData.firstName, userData.lastName)
 	fmt.Printf("Thank you for booking your %v tickets with us \n", conferenceName)
+	wg.Done()
 }

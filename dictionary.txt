@@ -21,3 +21,8 @@
         {keyName} dataType
     }
 5. use 'go' infornt of the function that you want to run, for make it separate gorouting so it won't be blocked other function
+6. how to sync on every routing
+   a. create a variable and use sync.WaitGroup
+   b. add {variable}.add(1) before the go routine
+   c. add {variable}.Done on the below of function that being waited
+   d. add {variable}.Wait on bootom of main function to flagging this routine was waiting other routine done
