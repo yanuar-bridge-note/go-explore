@@ -3,6 +3,7 @@ package main
 import (
 	"booking-app/helper"
 	"fmt"
+	"time"
 )
 
 const conferenceTickets uint = 50
@@ -87,7 +88,7 @@ func saveBooking(userTickets uint, firstName string, lastName string, emailAddre
 	// userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
 
 	bookings = append(bookings, userData)
-
+	sendTickets(userData)
 	fmt.Printf("Thank you %v %v for booking %v tickets.\nYou will recieve confirmation email at %v\n", firstName, lastName, userTickets, emailAddress)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, conferenceName)
 	firstNames = append(firstNames, firstName)
@@ -101,4 +102,11 @@ func closingMessage() {
 	for _, firstName := range firstNames {
 		fmt.Println("Thank you", firstName)
 	}
+}
+
+func sendTickets(userData UserData) {
+	time.Sleep(10 * time.Second)
+	fmt.Println("Sending ticket to", userData.emailAddress)
+	fmt.Printf("Dear %v %v, \n", userData.firstName, userData.lastName)
+	fmt.Printf("Thank you for booking your %v tickets with us \n", conferenceName)
 }
