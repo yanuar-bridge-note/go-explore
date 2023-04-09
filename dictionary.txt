@@ -13,4 +13,6 @@
 2. how to run multiple go files "go run 1.go 2.go etc" or go run .
 
 // -------------------9 April 2023 ------------------------ //
-1. use capital letter on first function name for make it available to use by other package
+1. use capital letter on first function / variable name for make it available to use by other package
+2. initialize map was like this map([datatype] datatype)
+3. create map of list will be like this make([] map(datatype)datatype)
