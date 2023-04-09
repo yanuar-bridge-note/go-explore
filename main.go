@@ -1,6 +1,7 @@
 package main
 
 import (
+	"booking-app/helper"
 	"fmt"
 )
 
@@ -15,7 +16,7 @@ func main() {
 	greetUser()
 	for remainingTickets > 0 {
 		firstName, lastName, emailAddress, userTickets := setUserInput()
-		isValidName, isValidEmail, isValidUserTickets := validateUserInput(firstName, lastName, emailAddress, userTickets)
+		isValidName, isValidEmail, isValidUserTickets := helper.ValidateUserInput(firstName, lastName, emailAddress, userTickets, remainingTickets)
 
 		if isValidName && isValidEmail && isValidUserTickets {
 			saveBooking(userTickets, firstName, lastName, emailAddress)
