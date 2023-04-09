@@ -16,3 +16,7 @@
 1. use capital letter on first function / variable name for make it available to use by other package
 2. initialize map was like this map([datatype] datatype)
 3. create map of list will be like this make([] map(datatype)datatype)
+4. how to define struct
+    type {structName} struct {
+        {keyName} dataType
+    }
